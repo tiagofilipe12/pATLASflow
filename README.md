@@ -1,4 +1,4 @@
-#pATLAS_mash_screen.nf
+# pATLAS_mash_screen.nf
 
 A pipeline to run mash screen for pATLAS.
 
