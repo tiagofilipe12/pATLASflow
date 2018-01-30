@@ -26,6 +26,9 @@ if(params.help) {
     log.info "  --singleEnd Provide this option if you have single-end reads. " +
         "By default the pipeline will assume that you provide paired-end " +
         "reads.    Default: false"
+    log.info "  --help  Opens this help. It will open only when --help is " +
+        "provided. So, yes, this line is pretty useless since you already " +
+        "know that if you reached here."
     log.info "----------------------------------------------------------------"
     exit 1
 }
