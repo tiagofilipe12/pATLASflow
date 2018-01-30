@@ -1,0 +1,10 @@
+# ignore developer folders
+work/
+reference/
+reads/
+.nextflow/
+.idea/
+
+
+# ignore all logs from nextflow
+.nextflow.log*
