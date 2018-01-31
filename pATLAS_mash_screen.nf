@@ -1,5 +1,7 @@
 #!/usr/bin/env nextflow
 
+import Helper
+
 // A pipeline to run mash screen for pATLAS.
 
 // if --help is used, print software usage
@@ -32,6 +34,12 @@
 //    log.info "----------------------------------------------------------------"
 //    exit 1
 //}
+
+if (params.help){
+    Help.print_help(params)
+    exit 0
+}
+
 
 // check if noWinner is provided or not
 winnerVar = (params.noWinner == false) ? "-w" : ""
