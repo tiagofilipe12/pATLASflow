@@ -4,7 +4,11 @@ reference/
 reads/
 .nextflow/
 .idea/
+docker-images/work/
+docker-images/.nextflow/
+docker-images/.nextflow.log*
 
 
 # ignore all logs from nextflow
 .nextflow.log*
+docker-images/.nextflow.log*
