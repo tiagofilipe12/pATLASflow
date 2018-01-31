@@ -3,6 +3,9 @@
 from statistics import median
 import json
 
+if __file__.endswith(".command.sh"):
+    MASH_TXT = '$mashtxt'
+
 def main(mash_output):
     '''converts top results to json
 
@@ -56,4 +59,4 @@ def main(mash_output):
 
 if __name__ == "__main__":
     # a variable from nextflow process
-    main('$mashtxt')
+    main(MASH_TXT)
