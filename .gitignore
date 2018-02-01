@@ -2,6 +2,7 @@
 work/
 reference/
 reads/
+fasta/
 .nextflow/
 .idea/
 docker-images/work/
