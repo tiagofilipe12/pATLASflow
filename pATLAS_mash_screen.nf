@@ -92,7 +92,7 @@ process runMashDist {
 
     """
     mash dist -p ${params.threads} -v ${params.pValue} \
-    -d ${params.mash_distance} ${db} ${fasta} >"${fasta}_mashdist.txt"
+    -d ${params.mash_distance} ${db} ${fasta} > ${fasta}_mashdist.txt
     """
 }
 
