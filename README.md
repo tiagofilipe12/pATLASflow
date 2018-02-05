@@ -2,6 +2,7 @@
 
 
 [![](https://img.shields.io/badge/nextflow->=0.27.3-blue.svg)](#)
+[![](https://img.shields.io/badge/docker-ready-green.svg)](https://hub.docker.com/r/tiagofilipe12/patlas_mash_screen/)
 
 A pipeline to run mash screen for pATLAS.
 
