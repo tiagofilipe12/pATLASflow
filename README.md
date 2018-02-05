@@ -2,8 +2,10 @@
 
 
 [![](https://img.shields.io/badge/nextflow->=0.27.3-blue.svg)](#)
-[![](https://img.shields.io/badge/MASH docker-ready-green.svg)](https://hub.docker.com/r/tiagofilipe12/patlas_mash_screen/)
-[![](https://img.shields.io/badge/MAPPING docker-ready-green.svg)](https://hub.docker.com/r/tiagofilipe12/patlas_mapping/)
+
+[![](https://img.shields.io/badge/docker_mash-ready-green.svg)](https://hub.docker.com/r/tiagofilipe12/patlas_mash_screen/)
+
+[![](https://img.shields.io/badge/docker_mapping-ready-green.svg)](https://hub.docker.com/r/tiagofilipe12/patlas_mapping/)
 
 A pipeline to run mash screen for pATLAS.
 
