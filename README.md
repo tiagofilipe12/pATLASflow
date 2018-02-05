@@ -11,26 +11,34 @@ It will output a `JSON` file that can be imported into [pATLAS](http://www.patla
 ## Usage
 
 ```
---threads       Number of threads that mash screen will have to run.   
-    Default: 1
---kMer      the length of the kmer to be used by mash.   Default: 21
---pValue        The p-value cutoff. Default: 0.05
---identity      The minimum identity value between two sequences. Default: 0.9
---noWinner      This option allows to disable the -w option of mash screen  
-    Default: false
---refSketch     The file that has the reference mash screen usedby pATLAS  
-    Default: reference/patlas.msh
---reads     The path to the read files. Here users may provide many samples in 
-    the same directory. However be assured that glob pattern is unique 
-    (e.g. 'path/to/*_{1,2}.fastq'). Default: reads/*_{1,2}.fastq.gz
---singleEnd     Provide this option if you have single-end reads. By default 
-    the pipeline will assume that you provide paired-end reads.    Default: false
---help      Opens this help. It will open only when --help is provided. So, 
-    yes, this line is pretty useless since you already know that if you 
-    reached here.
+Usage:
+   nextflow run tiagofilipe12/pATLAS_mash_screen.nf
+
+   Nextflow magic options:
+       -profile    Forces nextflow to run with docker or singularity.   Default: docker     Choices: standard, singularity
+   Main options:
+       --help  Opens this help. It will open only when --help is provided. So, yes, this line is pretty useless since you already know that if you reached here.
+       --version   Prints the version of the pipeline script.
+       --threads   Number of threads that mash screen will have to run.    Default: 1
+       --mash_screen   Enables mash screen run.
+       --assembly  Enables mash dist run to use fasta file against plasmid db
+       --mapping   Enables mapping pipeline.
+   Mash options:
+       --kMer  the length of the kmer to be used by mash.   Default: 21
+       --pValue    The p-value cutoff. Default: 0.05
+   Mash screen exclusive options:
+       --identity  The minimum identity value between two sequences. Default: 0.9
+       --noWinner  This option allows to disable the -w option of mash screen  Default: false
+   Mash dist exclusive options:
+       --mash_distance     Provide the maximum distance between two plasmids to be reported.   Default: 0.1
+   Reads options:
+       --reads The path to the read files. Here users may provide many samples in the same directory. However be assured that glob pattern is unique (e.g. 'path/to/*_{1,2}.fastq').
+       --singleEnd Provide this option if you have single-end reads. By default the pipeline will assume that you provide paired-end reads.    Default: false
+    Fasta options:
+       --fasta     Provide fasta file pattern to be searched by nextflow.  Default: 'fasta/*.fas'
 ```
 
-## TODO
 
-* Default inputs for `reads` and `refSketch` are still sketchy and `patlas.msh`
-should be downloaded [here](https://github.com/tiagofilipe12/mash_wrapper/releases/download/1.0.5/patlas.msh) for now.
+## Example run
+
+`nextflow run tiagofilipe12/pATLAS_auxiliary_scripts --assembly`

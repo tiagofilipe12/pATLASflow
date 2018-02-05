@@ -13,7 +13,7 @@ if (params.help) {
 winnerVar = (params.noWinner == false) ? "-w" : ""
 
 // start all optional channels
-readInputs = readInputs2 = mashRef = mashRef2 = fastaInputs = Channel.empty()
+readInputs = readInputs2 = fastaInputs = Channel.empty()
 
 /**
 * The combination of these four channels (two forked) allows to double check for
@@ -28,9 +28,6 @@ if (params.mash_screen || params.mapping) {
 }
 if (params.mash_screen || params.assembly) {
     refSketch = "/home/data/patlas.msh"
-//    Channel.fromPath("/home/data/*.msh")
-//        .ifEmpty { exit 0, "no mash sketch"}
-//        .into { mashRef; mashRef2 }
 }
 
 /**
@@ -65,7 +62,6 @@ process mashScreen {
 
     input:
     set sample, file(reads) from readInputs
-//    file db from mashRef
 
     output:
     file "sortedMashScreenResults_${sample}.txt" into mashScreenResults
@@ -100,7 +96,6 @@ process runMashDist {
 
     input:
     file fasta from fastaInputs
-//    file db from mashRef2
 
     output:
     file "${fasta}_mashdist.txt" into mashDistResults

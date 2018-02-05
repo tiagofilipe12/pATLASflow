@@ -8,6 +8,9 @@ class Help{
         println("===========================================================\n")
         println("Usage:")
         println("   nextflow run tiagofilipe12/pATLAS_mash_screen.nf\n")
+        println("   Nextflow magic options:")
+        println("       -profile    Forces nextflow to run with docker or " +
+            "singularity.   Default: docker     Choices: standard, singularity")
         println("   Main options:")
         println("       --help  Opens this help. It will open only when --help is " +
             "provided. So, yes, this line is pretty useless since you already " +
@@ -22,8 +25,6 @@ class Help{
         println("   Mash options:")
         println("       --kMer  the length of the kmer to be used by mash.   Default: 21")
         println("       --pValue    The p-value cutoff. Default: 0.05")
-        println("       --refSketch The file that has the reference mash screen used" +
-            " by pATLAS  Default: reference/patlas.msh")
         println("   Mash screen exclusive options:")
         println("       --identity  The minimum identity value between two sequences." +
             " Default: 0.9")
