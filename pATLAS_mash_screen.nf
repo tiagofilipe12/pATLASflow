@@ -27,9 +27,10 @@ if (params.mash_screen || params.mapping) {
         .into { readInputs; readInputs2 }
 }
 if (params.mash_screen || params.assembly) {
-    Channel.fromPath("/home/data/*.msh")
-        .ifEmpty { exit 0, "no mash sketch"}
-        .into { mashRef; mashRef2 }
+    refSketch = "/home/data/patlas.msh"
+//    Channel.fromPath("/home/data/*.msh")
+//        .ifEmpty { exit 0, "no mash sketch"}
+//        .into { mashRef; mashRef2 }
 }
 
 /**
@@ -64,14 +65,14 @@ process mashScreen {
 
     input:
     set sample, file(reads) from readInputs
-    file db from mashRef
+//    file db from mashRef
 
     output:
     file "sortedMashScreenResults_${sample}.txt" into mashScreenResults
 
     """
     mash screen -i ${params.identity} -v ${params.pValue} -p \
-    ${params.threads} ${winnerVar} ${db} ${reads} > mashScreenResults.txt
+    ${params.threads} ${winnerVar} ${refSketch} ${reads} > mashScreenResults.txt
     sort -gr mashScreenResults.txt > sortedMashScreenResults_${sample}.txt
     """
 }
@@ -99,14 +100,14 @@ process runMashDist {
 
     input:
     file fasta from fastaInputs
-    file db from mashRef2
+//    file db from mashRef2
 
     output:
     file "${fasta}_mashdist.txt" into mashDistResults
 
     """
     mash dist -p ${params.threads} -v ${params.pValue} \
-    -d ${params.mash_distance} ${db} ${fasta} > ${fasta}_mashdist.txt
+    -d ${params.mash_distance} ${refSketch} ${fasta} > ${fasta}_mashdist.txt
     """
 }
 
