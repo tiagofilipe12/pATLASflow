@@ -1,7 +1,7 @@
 # pATLAS_mash_screen.nf
 
 
-[![](https://img.shields.io/badge/nextflow-0.27.3-blue.svg)](#)
+[![](https://img.shields.io/badge/nextflow->=0.27.3-blue.svg)](#)
 
 A pipeline to run mash screen for pATLAS.
 
