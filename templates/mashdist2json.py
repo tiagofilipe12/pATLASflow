@@ -6,9 +6,18 @@ if __file__.endswith(".command.sh"):
     MASH_TXT = '$mashtxt'
 
 def main(mash_output):
+    '''
+    Main function that allows to dump a mash dist txt file to a json file
+
+    Parameters
+    ----------
+    mash_output: str
+        A string with the input file.
+
+    '''
     out_file = open(" ".join(mash_output.split(".")[:-1]) + ".json", "w")
     input_f = open(mash_output, 'r')
-    #temporary_list = []
+
     master_dict = {}
     for line in input_f:
         tab_split = line.split("\t")

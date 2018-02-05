@@ -7,7 +7,8 @@ if __file__.endswith(".command.sh"):
     MASH_TXT = '$mashtxt'
 
 def main(mash_output):
-    '''converts top results to json
+    '''
+    converts top results from mash screen txt output to json format
 
     Parameters
     ----------
