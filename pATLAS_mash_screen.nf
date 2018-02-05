@@ -27,7 +27,7 @@ if (params.mash_screen || params.mapping) {
         .into { readInputs; readInputs2 }
 }
 if (params.mash_screen || params.assembly) {
-    Channel.fromPath(params.refSketch)
+    Channel.fromPath("/home/data/*.msh")
         .ifEmpty { exit 0, "no mash sketch"}
         .into { mashRef; mashRef2 }
 }
