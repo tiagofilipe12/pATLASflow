@@ -8,7 +8,10 @@ RUN apt-get update && apt-get -y install \
     wget\
     zip\
     bzip2\
-    build-essential
+    build-essential\
+    zlib1g-dev\
+    libbz2-dev\
+    liblzma-dev
 
 WORKDIR /home/bin/
 
@@ -28,7 +31,7 @@ RUN tar jxf samtools-1.7.tar.bz2
 
 WORKDIR /home/bin/samtools-1.7/
 
-RUN ./configure && make
+RUN ./configure --without-curses && make
 
 RUN PATH="/home/bin/samtools:$PATH"
 
