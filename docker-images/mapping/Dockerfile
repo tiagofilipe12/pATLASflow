@@ -26,7 +26,7 @@ RUN wget https://sourceforge.net/projects/samtools/files/samtools/1.7/samtools-1
 
 RUN tar jxf samtools-1.7.tar.bz2
 
-WORKDIR /home/bin/samtools/
+WORKDIR /home/bin/samtools-1.7/
 
 RUN ./configure && make
 
