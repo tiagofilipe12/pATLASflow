@@ -4,13 +4,13 @@ MAINTAINER Tiago F. Jesus, tiagojesus@medicina.ulisboa.pt
 
 # INSTALL DEPENDENCIES
 RUN apt-get update && apt-get -y install \
-    python3\
-    wget\
-    zip\
-    bzip2\
-    build-essential\
-    zlib1g-dev\
-    libbz2-dev\
+    python3 \
+    wget \
+    zip \
+    bzip2 \
+    build-essential \
+    zlib1g-dev \
+    libbz2-dev \
     liblzma-dev
 
 WORKDIR /home/bin/
@@ -43,4 +43,6 @@ RUN wget https://github.com/tiagofilipe12/PlasmidCoverage/releases/download/1.0.
 
 RUN tar xvzf indexes.tar.gz
 
-# I think that this is it but needs still needs testing
+# Fetches json with lenghts used to generate -k parameter for bowtie as well as
+# plasmid lenghts
+RUN wget https://raw.githubusercontent.com/tiagofilipe12/PlasmidCoverage/master/plasmiduncover/json/reads_sample_result_length.json

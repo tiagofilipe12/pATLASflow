@@ -13,7 +13,9 @@ if (params.help) {
 winnerVar = (params.noWinner == false) ? "-w" : ""
 
 // start all optional channels
-readInputs = readInputs2 = fastaInputs = Channel.empty()
+readInputs = Channel.empty()
+readInputs2 = Channel.empty()
+fastaInputs = Channel.empty()
 
 /**
 * The combination of these four channels (two forked) allows to double check for
@@ -25,6 +27,13 @@ if (params.mash_screen || params.mapping) {
     Channel.fromFilePairs(params.reads, size: params.singleEnd ? 1 : 2, type: 'file')
         .ifEmpty { exit 0, "reads (fastq) files were not provided" }
         .into { readInputs; readInputs2 }
+    // this empties one of the channels in the case one is not required to run
+    if (params.mash_screen == false) {
+        readInputs = Channel.empty()
+    }
+    else if (params.mapping == false) {
+        readInputs2 = Channel.empty()
+    }
 }
 if (params.mash_screen || params.assembly) {
     refSketch = "/home/data/patlas.msh"
@@ -46,8 +55,9 @@ if (params.assembly) {
 //todo implement checks on file type
 
 if (params.mapping == true) {
-    //todo something for mapping
-    // bowtie2 index and samtools index channels
+    //fetch indexes for mapping approach, available in Docker
+    bowtie2Index = "/home/data/indexes/bowtie2idx/bowtie2.idx"  // idx_file
+    samtoolsIndex = "/home/data/indexes/fasta/samtools.fasta"   // maindb_path
 }
 
 /******************************/
@@ -116,4 +126,35 @@ process mashDistOutputJson {
 
     script:
     template "mashdist2json.py"
+}
+
+/******************************/
+/********** MAPPING ***********/
+/******************************/
+
+//TODO get max_k from dictionary with lengths --> using python?
+
+process mappingBowtie {
+
+    tag { "mapping sample: " + sample}
+
+    input:
+    set sample, file(reads) from readInputs2
+
+    output:
+    file "mappingBowtie_${sample}.sam" into bowtieResults
+
+    script:
+
+    if (params.singleEnd == true) {
+        readsString = "-U ${reads}"
+    }
+    else {
+        readsString = "-1 ${reads[0]} -2 ${reads[1]}"
+        println(readsString)
+    }
+
+    """
+    bowtie2 -x bowtie2Index ${readsString} -p ${params.threads} -k ${max_k}
+    """
 }
