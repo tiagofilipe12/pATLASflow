@@ -40,7 +40,7 @@ class Help{
         println("       --singleEnd Provide this option if you have single-end reads. " +
             "By default the pipeline will assume that you provide paired-end " +
             "reads.    Default: false")
-        println("    Fasta options:")
+        println("   Fasta options:")
         println("       --fasta     Provide fasta file pattern to be searched by " +
             "nextflow.  Default: 'fasta/*.fas'")
         println("   Bowtie2 options:")

@@ -39,8 +39,11 @@ Usage:
    Reads options:
        --reads The path to the read files. Here users may provide many samples in the same directory. However be assured that glob pattern is unique (e.g. 'path/to/*_{1,2}.fastq').
        --singleEnd Provide this option if you have single-end reads. By default the pipeline will assume that you provide paired-end reads.    Default: false
-    Fasta options:
+   Fasta options:
        --fasta     Provide fasta file pattern to be searched by nextflow.  Default: 'fasta/*.fas'
+   Bowtie2 options:
+       --max_k     Provide the maximum number of alignments allowed per read.  Default: 10949 (the number of plasmids present in pATLAS)
+       --trim5     Provide parameter -5 to bowtie2 allowing to trim 5' end.    Default: 0
 ```
 
 

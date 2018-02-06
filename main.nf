@@ -132,8 +132,6 @@ process mashDistOutputJson {
 /********** MAPPING ***********/
 /******************************/
 
-//TODO get max_k from dictionary with lengths --> using python?
-
 process mappingBowtie {
 
     tag { "mapping sample: " + sample}
