@@ -12,7 +12,7 @@ WORKDIR /home/bin/
 
 # Download and install bowtie2
 
-RUN wget -O bowtie2-2.3.4-linux-x86_64.zip https://downloads.sourceforge.net/project/bowtie-bio/bowtie2/2.3.4/bowtie2-2.3.4-linux-x86_64.zip?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fbowtie-bio%2Ffiles%2Fbowtie2%2F2.3.4%2Fbowtie2-2.3.4-linux-x86_64.zip%2Fdownload&ts=1517846768
+RUN wget https://downloads.sourceforge.net/project/bowtie-bio/bowtie2/2.3.4/bowtie2-2.3.4-linux-x86_64.zip
 
 RUN unzip bowtie2-2.3.4-linux-x86_64.zip
 
@@ -20,9 +20,9 @@ ENV PATH="/home/bin/bowtie2-2.3.4-linux-x86_64:$PATH"
 
 # Download and install samtools
 
-RUN wget -O samtools.tar.bz2 https://sourceforge.net/projects/samtools/files/samtools/1.7/samtools-1.7.tar.bz2/download
+RUN wget https://sourceforge.net/projects/samtools/files/samtools/1.7/samtools-1.7.tar.bz2
 
-RUN tar jxf samtools.tar.bz2
+RUN tar jxf samtools-1.7.tar.bz2
 
 WORKDIR /home/bin/samtools/
 
