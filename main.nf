@@ -132,6 +132,7 @@ process mashDistOutputJson {
 /********** MAPPING ***********/
 /******************************/
 
+// process that runs bowtie2
 process mappingBowtie {
 
     tag { "mapping sample: " + sample}
@@ -157,3 +158,19 @@ process mappingBowtie {
     -5 ${params.trim5} -S mappingBowtie_${sample}.sam
     """
 }
+
+// process for samtools view
+//print("3) " + "samtools view -b -S -t " + maindb_path + ".fai" +
+//          " -@ " + threads + " -o " + bam_file + " " + sam_file)
+
+// process for samtools sort
+//print("4) " + "samtools sort" + " -@ " + threads + " -o " +
+//          sorted_bam_file + " " + bam_file)
+
+// process for samtools index
+//print("5) " + "samtools index " + sorted_bam_file)
+
+// process for samtools depth
+//print("6) " + "samtools depth " + sorted_bam_file)
+
+// process to dump txt depth file to json
