@@ -5,7 +5,8 @@ MAINTAINER Tiago F. Jesus, tiagojesus@medicina.ulisboa.pt
 # INSTALL DEPENDENCIES
 RUN apt-get update && apt-get -y install \
     python3\
-    wget
+    wget\
+    unzip
 
 WORKDIR /home/bin/
 
