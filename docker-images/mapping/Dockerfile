@@ -7,7 +7,8 @@ RUN apt-get update && apt-get -y install \
     python3\
     wget\
     zip\
-    bzip2
+    bzip2\
+    build-essential
 
 WORKDIR /home/bin/
 
