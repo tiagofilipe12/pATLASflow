@@ -6,7 +6,7 @@ MAINTAINER Tiago F. Jesus, tiagojesus@medicina.ulisboa.pt
 RUN apt-get update && apt-get -y install \
     python3\
     wget\
-    unzip
+    zip
 
 WORKDIR /home/bin/
 
