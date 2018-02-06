@@ -155,6 +155,7 @@ process mappingBowtie {
     }
 
     """
-    bowtie2 -x bowtie2Index ${readsString} -p ${params.threads} -k ${max_k}
+    bowtie2 -x bowtie2Index ${readsString} -p ${params.threads} -k ${params.max_k}\
+    -5 ${params.trim5} -S mappingBowtie_${sample}.sam
     """
 }
