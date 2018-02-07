@@ -50,14 +50,13 @@ if (params.assembly) {
         .ifEmpty {exit 0, "no fasta file was provided"}
 }
 
-//TODO add channel for mapping index files
-
 //todo implement checks on file type
 
 if (params.mapping == true) {
     //fetch indexes for mapping approach, available in Docker
     bowtie2Index = "/home/data/indexes/bowtie2idx/bowtie2.idx"  // idx_file
     samtoolsIndex = "/home/data/indexes/fasta/samtools.fasta.fai"   // maindb_path
+    lengthJson = "/home/data/reads_sample_result_length.json"
 }
 
 /******************************/
@@ -163,6 +162,7 @@ process mappingBowtie {
 * image.
 */
 process samtoolsView {
+
     tag { "samtools view: " +  sample }
 
     input:
@@ -179,4 +179,17 @@ process samtoolsView {
     """
 }
 
-// process to dump txt depth file to json
+/**
+* These dumping process parses the depth file for each sample and filters it
+* depending on the cutoff set by the user.
+*/
+process jsonDumpingMapping {
+
+    tag { "Dumping json: " +  sample }
+
+    input:
+    set sample, file(depthFile) from samtoolsResults
+
+    script:
+    template "mapping2json.py"
+}

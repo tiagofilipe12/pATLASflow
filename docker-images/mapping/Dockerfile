@@ -33,7 +33,7 @@ WORKDIR /home/bin/samtools-1.7/
 
 RUN ./configure --without-curses && make
 
-RUN PATH="/home/bin/samtools:$PATH"
+RUN PATH="/home/bin/samtools-1.7:$PATH"
 
 # Download databases from PlasmidCoverage
 

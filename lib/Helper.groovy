@@ -48,6 +48,8 @@ class Help{
             "per read.  Default: 10949 (the number of plasmids present in pATLAS)")
         println("       --trim5     Provide parameter -5 to bowtie2 allowing to trim " +
             "5' end.    Default: 0")
+        println("       --cov_cutoff    Provide a cutoff value to filter results for " +
+            "coverage results.  Default: 0.60")
     }
 
 }
