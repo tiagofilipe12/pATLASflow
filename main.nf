@@ -57,7 +57,7 @@ if (params.assembly) {
 if (params.mapping == true) {
     //fetch indexes for mapping approach, available in Docker
     bowtie2Index = "/home/data/indexes/bowtie2idx/bowtie2.idx"  // idx_file
-    samtoolsIndex = "/home/data/indexes/fasta/samtools.fasta"   // maindb_path
+    samtoolsIndex = "/home/data/indexes/fasta/samtools.fasta.fai"   // maindb_path
 }
 
 /******************************/
@@ -78,8 +78,8 @@ process mashScreen {
 
     """
     mash screen -i ${params.identity} -v ${params.pValue} -p \
-    ${params.threads} ${winnerVar} ${refSketch} ${reads} > mashScreenResults.txt
-    sort -gr mashScreenResults.txt > sortedMashScreenResults_${sample}.txt
+    ${params.threads} ${winnerVar} ${refSketch} ${reads} > mashScreenResults_${sample}.txt
+    sort -gr mashScreenResults_${sample}.txt > sortedMashScreenResults_${sample}.txt
     """
 }
 
@@ -141,7 +141,7 @@ process mappingBowtie {
     set sample, file(reads) from readInputs2
 
     output:
-    file "mappingBowtie_${sample}.sam" into bowtieResults
+    set sample, file("mappingBowtie_${sample}.sam") into bowtieResults
 
     script:
 
@@ -150,27 +150,33 @@ process mappingBowtie {
     }
     else {
         readsString = "-1 ${reads[0]} -2 ${reads[1]}"
-        println(readsString)
     }
 
     """
-    bowtie2 -x bowtie2Index ${readsString} -p ${params.threads} -k ${params.max_k}\
-    -5 ${params.trim5} -S mappingBowtie_${sample}.sam
+    bowtie2 -x ${bowtie2Index} ${readsString} -p ${params.threads} -k \
+    ${params.max_k} -5 ${params.trim5} -S mappingBowtie_${sample}.sam
     """
 }
 
-// process for samtools view
-//print("3) " + "samtools view -b -S -t " + maindb_path + ".fai" +
-//          " -@ " + threads + " -o " + bam_file + " " + sam_file)
+/**
+* samtools faidx is escaped because index file is already provided in docker
+* image.
+*/
+process samtoolsView {
+    tag { "samtools view: " +  sample }
 
-// process for samtools sort
-//print("4) " + "samtools sort" + " -@ " + threads + " -o " +
-//          sorted_bam_file + " " + bam_file)
+    input:
+    set sample, file(samtoolsFile) from bowtieResults
 
-// process for samtools index
-//print("5) " + "samtools index " + sorted_bam_file)
+    output:
+    set sample, file("samtoolsDepthOutput_${sample}.txt") into samtoolsResults
 
-// process for samtools depth
-//print("6) " + "samtools depth " + sorted_bam_file)
+    """
+    samtools view -b -t ${samtoolsIndex} -@ ${params.threads} ${samtoolsFile} | \
+    samtools sort -@ ${params.threads} -o samtoolsSorted_${sample}.bam
+    samtools index samtoolsSorted_${sample}.bam
+    samtools depth samtoolsSorted_${sample}.bam > samtoolsDepthOutput_${sample}.txt
+    """
+}
 
 // process to dump txt depth file to json
