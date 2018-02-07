@@ -47,8 +47,8 @@ def depthfilereader(depth_file, plasmid_length, cutoff):
         perc_value_per_ref = float(len(depth_dic_coverage[ref])) / \
                                        float(plasmid_length[ref])
         # checks if percentage value is higher or equal to the cutoff defined
-        # if perc_value_per_ref >= float(cutoff):
-        percentage_basescovered[ref] = perc_value_per_ref
+        if perc_value_per_ref >= float(cutoff):
+            percentage_basescovered[ref] = perc_value_per_ref
 
     return percentage_basescovered
 
