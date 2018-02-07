@@ -89,5 +89,4 @@ def main(depth_file, json_dict, cutoff):
 
 if __name__ == "__main__":
     # a variable from nextflow process
-    # main(DEPTH_TXT, JSON_LENGTH, CUTOFF)
-    main('/home/tiago/bin/pATLAS_auxiliary_scripts/test.depth.txt', '/home/tiago/bin/PlasmidCoverage/plasmiduncover/json/reads_sample_result_length.json', '0.6')
+    main(DEPTH_TXT, JSON_LENGTH, CUTOFF)
