@@ -1,10 +1,10 @@
 # DOCKERFILE to run mash_screen for pATLAS
-FROM ubuntu:16.04
+FROM ummidock/assemblerflow_base:1.0.0
 MAINTAINER Tiago F. Jesus, tiagojesus@medicina.ulisboa.pt
 
 # INSTALL DEPENDENCIES
 RUN apt-get update && apt-get -y install \
-    python3 \
+    #python3 \
     wget \
     zip \
     bzip2 \
