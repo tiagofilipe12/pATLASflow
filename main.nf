@@ -163,7 +163,7 @@ process mappingBowtie {
 */
 process samtoolsView {
 
-    tag { "samtools view: " +  sample }
+    tag { "samtools commands: " +  sample }
 
     input:
     set sample, file(samtoolsFile) from bowtieResults
