@@ -36,7 +36,9 @@ if (params.mash_screen || params.mapping) {
     }
 }
 if (params.mash_screen || params.assembly) {
-    refSketch = "/home/data/patlas.msh"
+    refSketchChannel = Channel
+                .value("/home/data/patlas.msh")
+//    refSketch = "/home/data/patlas.msh"
 }
 
 /**
@@ -71,6 +73,7 @@ process mashScreen {
 
     input:
     set sample, file(reads) from readInputs
+    val refSketch from refSketchChannel
 
     output:
     file "sortedMashScreenResults_${sample}.txt" into mashScreenResults
@@ -105,6 +108,7 @@ process runMashDist {
 
     input:
     file fasta from fastaInputs
+    val refSketch from refSketchChannel
 
     output:
     file "${fasta}_mashdist.txt" into mashDistResults
