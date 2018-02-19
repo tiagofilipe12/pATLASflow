@@ -1,11 +1,19 @@
 # pATLASflow
 
-
 [![](https://img.shields.io/badge/nextflow->=0.27.3-blue.svg)](#)
 [![](https://img.shields.io/badge/docker_mash-ready-green.svg)](https://hub.docker.com/r/tiagofilipe12/patlasflow_mash_screen/)
 [![](https://img.shields.io/badge/docker_mapping-ready-green.svg)](https://hub.docker.com/r/tiagofilipe12/patlasflow_mapping/)
 
 A pipeline to run mash screen for pATLAS.
+
+# TOC
+
+* [Brief description](#brief-description)
+* [Requirements](#requiremnets)
+    * [Conda recipe for nextflow](#conda-recipe-for-nextflow)
+* [Usage](#usage)
+* [Example run](#example-run)
+* [TL;DR](#tl-dr)
 
 ## Brief description
 
