@@ -1,4 +1,4 @@
-# pATLAS_mash_screen.nf
+# pATLASflow
 
 
 [![](https://img.shields.io/badge/nextflow->=0.27.3-blue.svg)](#)
@@ -16,15 +16,14 @@ It will output a `JSON` file that can be imported into [pATLAS](http://www.patla
 ## Usage
 
 ```
-Usage:
-   nextflow run tiagofilipe12/pATLAS_mash_screen.nf
+Usage: nextflow run tiagofilipe12/pATLASflow [options] or nextflow run main.nf [options] or ./main.nf [options]
 
-   Nextflow magic options:
+  Nextflow magic options:
        -profile    Forces nextflow to run with docker or singularity.   Default: docker     Choices: standard, singularity
    Main options:
        --help  Opens this help. It will open only when --help is provided. So, yes, this line is pretty useless since you already know that if you reached here.
        --version   Prints the version of the pipeline script.
-       --threads   Number of threads that mash screen will have to run.    Default: 1
+       --threads   Number of threads that the pipeline will have to run.    Default: 1
        --mash_screen   Enables mash screen run.
        --assembly  Enables mash dist run to use fasta file against plasmid db
        --mapping   Enables mapping pipeline.
@@ -44,9 +43,25 @@ Usage:
    Bowtie2 options:
        --max_k     Provide the maximum number of alignments allowed per read.  Default: 10949 (the number of plasmids present in pATLAS)
        --trim5     Provide parameter -5 to bowtie2 allowing to trim 5' end.    Default: 0
+       --cov_cutoff    Provide a cutoff value to filter results for coverage results.  Default: 0.60
+
 ```
 
 
 ## Example run
 
-`nextflow run tiagofilipe12/pATLAS_auxiliary_scripts --assembly`
+`nextflow run tiagofilipe12/pATLASflow --assembly`
+
+## TL;DR
+
+1. Read files must be placed in `<current working dir>/reads/` folder
+
+2. Fasta files must be placed in `<current working dir>/fasta/` folder
+
+3. Run the pipeline `nextflow run tiagofilipe12/pATLASflow` with the options you require:
+    * Assembly: `nextflow run tiagofilipe12/pATLASflow --assembly`
+    * Mapping: `nextflow run tiagofilipe12/pATLASflow --mapping`
+    * Mash screen: `nextflow run tiagofilipe12/pATLASflow --mash_screen`
+
+    Note: you can even run all approaches by doing:
+    `nextflow run tiagofilipe12/pATLASflow --assembly --mapping --mash_screen`
