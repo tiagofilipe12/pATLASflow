@@ -9,11 +9,11 @@ A pipeline to run mash screen for pATLAS.
 # TOC
 
 * [Brief description](#brief-description)
-* [Requirements](#requiremnets)
+* [Requirements](#requirements)
     * [Conda recipe for nextflow](#conda-recipe-for-nextflow)
 * [Usage](#usage)
 * [Example run](#example-run)
-* [TL;DR](#tl-dr)
+* [TL;DR](#tldr)
 
 ## Brief description
 
