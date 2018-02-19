@@ -3,8 +3,9 @@
 [![](https://img.shields.io/badge/nextflow->=0.27.3-blue.svg)](#)
 [![](https://img.shields.io/badge/docker_mash-ready-green.svg)](https://hub.docker.com/r/tiagofilipe12/patlasflow_mash_screen/)
 [![](https://img.shields.io/badge/docker_mapping-ready-green.svg)](https://hub.docker.com/r/tiagofilipe12/patlasflow_mapping/)
+[![](https://img.shields.io/badge/pATLAS-1.x.x-lightgrey.svg)](https://github.com/tiagofilipe12/pATLAS)
 
-A pipeline to run mash screen for pATLAS.
+A pipeline to run mapping, mash screen and assembly methods for pATLAS.
 
 # TOC
 
@@ -14,6 +15,21 @@ A pipeline to run mash screen for pATLAS.
 * [Usage](#usage)
 * [Example run](#example-run)
 * [TL;DR](#tldr)
+
+
+## TL;DR
+
+1. Read files must be placed in `<current working dir>/reads/` folder
+
+2. Fasta files must be placed in `<current working dir>/fasta/` folder
+
+3. Run the pipeline `nextflow run tiagofilipe12/pATLASflow` with the options you require:
+    * Assembly: `nextflow run tiagofilipe12/pATLASflow --assembly`
+    * Mapping: `nextflow run tiagofilipe12/pATLASflow --mapping`
+    * Mash screen: `nextflow run tiagofilipe12/pATLASflow --mash_screen`
+
+    Note: you can even run all approaches by doing:
+    `nextflow run tiagofilipe12/pATLASflow --assembly --mapping --mash_screen`
 
 ## Brief description
 
@@ -71,16 +87,3 @@ Usage: nextflow run tiagofilipe12/pATLASflow [options] or nextflow run main.nf [
 
 `nextflow run tiagofilipe12/pATLASflow --assembly`
 
-## TL;DR
-
-1. Read files must be placed in `<current working dir>/reads/` folder
-
-2. Fasta files must be placed in `<current working dir>/fasta/` folder
-
-3. Run the pipeline `nextflow run tiagofilipe12/pATLASflow` with the options you require:
-    * Assembly: `nextflow run tiagofilipe12/pATLASflow --assembly`
-    * Mapping: `nextflow run tiagofilipe12/pATLASflow --mapping`
-    * Mash screen: `nextflow run tiagofilipe12/pATLASflow --mash_screen`
-
-    Note: you can even run all approaches by doing:
-    `nextflow run tiagofilipe12/pATLASflow --assembly --mapping --mash_screen`
