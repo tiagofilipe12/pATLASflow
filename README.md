@@ -13,6 +13,17 @@ This Nextflow script is an implementation of [mash-wrapper](https://github.com/t
 for mash screen module.
 It will output a `JSON` file that can be imported into [pATLAS](http://www.patlas.site).
 
+## Requirements
+
+* [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) or higher.
+* [Docker](https://docs.docker.com/install/) or [Singularity](http://singularity.lbl.gov/install-linux).
+* [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html#installation) - follow the two installation steps (there is no need to read anything else).
+
+### Conda recipe for nextflow
+
+If you prefer you can use this conda recipe for nextflow: [![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat-square)](http://bioconda.github.io/recipes/nextflow/README.html)
+
+
 ## Usage
 
 ```
