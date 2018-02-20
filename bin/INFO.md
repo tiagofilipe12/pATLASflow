@@ -1,0 +1,1 @@
+This file is required because nextflow somehow cannot read env scope if bin folder does not exist
