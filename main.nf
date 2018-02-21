@@ -61,10 +61,22 @@ if (params.assembly) {
 //todo implement checks on file type
 
 if (params.mapping == true) {
+
     //fetch indexes for mapping approach, available in Docker
-    bowtie2Index = "/home/data/indexes/bowtie2idx/bowtie2.idx"  // idx_file
-    samtoolsIndex = "/home/data/indexes/fasta/samtools.fasta.fai"   // maindb_path
-    lengthJson = "/home/data/reads_sample_result_length.json"
+//    bowtie2Index = "/home/data/indexes/bowtie2idx/bowtie2.idx"  // idx_file
+//    samtoolsIndex = "/home/data/indexes/fasta/samtools.fasta.fai"   // maindb_path
+//    lengthJson = "/home/data/reads_sample_result_length.json"
+    bowtieStuffChannel = Channel
+        .value("/home/data/indexes/bowtie2idx/bowtie2.idx")
+    samtoolsStuffChannel = Channel
+        .value("/home/data/indexes/fasta/samtools.fasta.fai")
+    lengthJsonChannel = Channel
+        .value("/home/data/reads_sample_result_length.json")
+}
+else {
+    bowtieStuffChannel = Channel.empty()
+    samtoolsStuffChannel = Channel.empty()
+    lengthJsonChannel = Channel.empty()
 }
 
 /******************************/
@@ -148,6 +160,7 @@ process mappingBowtie {
 
     input:
     set sample, file(reads) from readInputs2
+    val bowtie2Index from bowtieStuffChannel
 
     output:
     set sample, file("mappingBowtie_${sample}.sam") into bowtieResults
@@ -177,12 +190,13 @@ process samtoolsView {
 
     input:
     set sample, file(samtoolsFile) from bowtieResults
+    val samtoolsIdx from samtoolsStuffChannel
 
     output:
     set sample, file("samtoolsDepthOutput_${sample}.txt") into samtoolsResults
 
     """
-    samtools view -b -t ${samtoolsIndex} -@ ${params.threads} ${samtoolsFile} | \
+    samtools view -b -t ${samtoolsIdx} -@ ${params.threads} ${samtoolsFile} | \
     samtools sort -@ ${params.threads} -o samtoolsSorted_${sample}.bam
     samtools index samtoolsSorted_${sample}.bam
     samtools depth samtoolsSorted_${sample}.bam > samtoolsDepthOutput_${sample}.txt
@@ -199,6 +213,7 @@ process jsonDumpingMapping {
 
     input:
     set sample, file(depthFile) from samtoolsResults
+    val lengthJson from lengthJsonChannel
 
     script:
     template "mapping2json.py"
