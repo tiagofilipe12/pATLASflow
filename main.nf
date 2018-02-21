@@ -36,9 +36,15 @@ if (params.mash_screen || params.mapping) {
     }
 }
 if (params.mash_screen || params.assembly) {
-    refSketchChannel = Channel
-                .value("/home/data/patlas.msh")
-//    refSketch = "/home/data/patlas.msh"
+    // creates two channels for each approach
+    Channel
+        .value("/home/data/patlas.msh")
+        .into { refSketchChannel; refSketchChannel2 }
+}
+else {
+    // creates an empty channel for both processes
+    Channel.empty()
+        .into { refSketchChannel; refSketchChannel2 }
 }
 
 /**
@@ -108,7 +114,7 @@ process runMashDist {
 
     input:
     file fasta from fastaInputs
-    val refSketch from refSketchChannel
+    val refSketch from refSketchChannel2
 
     output:
     file "${fasta}_mashdist.txt" into mashDistResults
