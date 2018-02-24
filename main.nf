@@ -233,18 +233,18 @@ process jsonDumpingMapping {
 */
 
 process consensus {
-//
+
     tag { "Creating consensus json file: " + sample}
-//
+
     input:
     set sample, file(mappingOutputFile) from mappingOutput
     set sample, file(mashDistOutputFile) from mashDistOutput
     set sample, file(mashScreenOutputFile) from mashScreenOutput
-//
+
     script:
     // TODO set this variables to false
-//    mappingOutputFile = false
-//    mashDistOutputFile = false
-    template "consensus_json.py"
-//
+    // mappingOutputFile = false
+    // mashDistOutputFile = false
+    template "pATLAS_consensus_json.py"
+
 }
