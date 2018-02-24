@@ -94,7 +94,7 @@ process mashScreen {
     val refSketch from refSketchChannel
 
     output:
-    file "sortedMashScreenResults_${sample}.txt" into mashScreenResults
+    set sample, file("sortedMashScreenResults_${sample}.txt") into mashScreenResults
 
     """
     mash screen -i ${params.identity} -v ${params.pValue} -p \
@@ -109,7 +109,10 @@ process mashOutputJson {
     tag { "dumping json file from: " + mashtxt }
 
     input:
-    file mashtxt from mashScreenResults
+    set sample, file(mashtxt) from mashScreenResults
+
+    output:
+    set sample, file("sortedMashScreenResults_${sample}.json") into mashScreenOutput
 
     script:
     template "mashscreen2json.py"
@@ -129,7 +132,7 @@ process runMashDist {
     val refSketch from refSketchChannel2
 
     output:
-    file "${fasta}_mashdist.txt" into mashDistResults
+    set fasta, file("${fasta}_mashdist.txt") into mashDistResults
 
     """
     mash dist -p ${params.threads} -v ${params.pValue} \
@@ -143,7 +146,10 @@ process mashDistOutputJson {
     tag { "dumping json file from: " + mashtxt }
 
     input:
-    file mashtxt from mashDistResults
+    set fasta, file(mashtxt) from mashDistResults
+
+    output:
+    set fasta, file("${fasta}_mashdist.json") into mashDistOutput
 
     script:
     template "mashdist2json.py"
@@ -215,6 +221,30 @@ process jsonDumpingMapping {
     set sample, file(depthFile) from samtoolsResults
     val lengthJson from lengthJsonChannel
 
+    output:
+    set sample, file("samtoolsDepthOutput_${sample}.txt.json") into mappingOutput
+
     script:
     template "mapping2json.py"
+}
+
+/**
+* A process that creates a consensus from all the outputted json files
+*/
+
+process consensus {
+//
+    tag { "Creating consensus json file: " + sample}
+//
+    input:
+    set sample, file(mappingOutputFile) from mappingOutput
+    set sample, file(mashDistOutputFile) from mashDistOutput
+    set sample, file(mashScreenOutputFile) from mashScreenOutput
+//
+    script:
+    // TODO set this variables to false
+//    mappingOutputFile = false
+//    mashDistOutputFile = false
+    template "consensus_json.py"
+//
 }
