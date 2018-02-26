@@ -242,9 +242,6 @@ process consensus {
     set sample, file(mashScreenOutputFile) from mashScreenOutput
 
     script:
-    // TODO set this variables to false
-    // mappingOutputFile = false
-    // mashDistOutputFile = false
     template "pATLAS_consensus_json.py"
 
 }
