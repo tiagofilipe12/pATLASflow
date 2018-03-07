@@ -253,7 +253,7 @@ else {
 */
 process fullConsensus {
 
-    tag { "Creating consensus json file: ${sample}" }
+    tag { "Creating consensus json file" }
 
     input:
     file(list_of_files) from test
