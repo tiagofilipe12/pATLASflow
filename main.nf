@@ -60,7 +60,7 @@ if (params.assembly) {
 
 //todo implement checks on file type
 
-if (params.mapping == true) {
+if (params.mapping) {
 
     //fetch indexes for mapping approach, available in Docker
 //    bowtie2Index = "/home/data/indexes/bowtie2idx/bowtie2.idx"  // idx_file
@@ -112,7 +112,7 @@ process mashOutputJson {
     set sample, file(mashtxt) from mashScreenResults
 
     output:
-    set sample, file("sortedMashScreenResults_${sample}.json") into mashScreenOutput
+    file "sortedMashScreenResults_${sample}.json" into mashScreenOutput
 
     script:
     template "mashscreen2json.py"
@@ -149,7 +149,7 @@ process mashDistOutputJson {
     set fasta, file(mashtxt) from mashDistResults
 
     output:
-    set fasta, file("${fasta}_mashdist.json") into mashDistOutput
+    file "${fasta}_mashdist.json" into mashDistOutput
 
     script:
     template "mashdist2json.py"
@@ -222,24 +222,41 @@ process jsonDumpingMapping {
     val lengthJson from lengthJsonChannel
 
     output:
-    set sample, file("samtoolsDepthOutput_${sample}.txt.json") into mappingOutput
+    file "samtoolsDepthOutput_${sample}.txt.json" into mappingOutput
 
     script:
     template "mapping2json.py"
 }
 
+
+/**
+* After generating all output jsons check again the params specified.
+* If mapping and mash_screen are executed the consensus process will generate
+* a consensus from these two json outputs. If assembly is also provided, the
+* consensus will have the consensus between the three approaches. Otherwise,
+* no consensus will be generated.
+*/
+if (params.mapping && params.mash_screen) {
+    if (params.assembly) {
+        test = mappingOutput.merge(mashDistOutput, mashScreenOutput)
+    }
+    else {
+        test = mappingOutput.merge(mashScreenOutput)
+    }
+}
+else {
+    test = Channel.empty()
+}
+
 /**
 * A process that creates a consensus from all the outputted json files
 */
+process fullConsensus {
 
-process consensus {
-
-    tag { "Creating consensus json file: " + sample}
+    tag { "Creating consensus json file: ${sample}" }
 
     input:
-    set sample, file(mappingOutputFile) from mappingOutput
-    set sample, file(mashDistOutputFile) from mashDistOutput
-    set sample, file(mashScreenOutputFile) from mashScreenOutput
+    file(list_of_files) from test
 
     script:
     template "pATLAS_consensus_json.py"
