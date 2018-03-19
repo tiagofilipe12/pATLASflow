@@ -60,7 +60,7 @@ if (params.assembly) {
 
 //todo implement checks on file type
 
-if (params.mapping == true) {
+if (params.mapping) {
 
     //fetch indexes for mapping approach, available in Docker
 //    bowtie2Index = "/home/data/indexes/bowtie2idx/bowtie2.idx"  // idx_file
@@ -94,7 +94,7 @@ process mashScreen {
     val refSketch from refSketchChannel
 
     output:
-    file "sortedMashScreenResults_${sample}.txt" into mashScreenResults
+    set sample, file("sortedMashScreenResults_${sample}.txt") into mashScreenResults
 
     """
     mash screen -i ${params.identity} -v ${params.pValue} -p \
@@ -109,7 +109,10 @@ process mashOutputJson {
     tag { "dumping json file from: " + mashtxt }
 
     input:
-    file mashtxt from mashScreenResults
+    set sample, file(mashtxt) from mashScreenResults
+
+    output:
+    file "sortedMashScreenResults_${sample}.json" into mashScreenOutput
 
     script:
     template "mashscreen2json.py"
@@ -129,7 +132,7 @@ process runMashDist {
     val refSketch from refSketchChannel2
 
     output:
-    file "${fasta}_mashdist.txt" into mashDistResults
+    set fasta, file("${fasta}_mashdist.txt") into mashDistResults
 
     """
     mash dist -p ${params.threads} -v ${params.pValue} \
@@ -143,7 +146,10 @@ process mashDistOutputJson {
     tag { "dumping json file from: " + mashtxt }
 
     input:
-    file mashtxt from mashDistResults
+    set fasta, file(mashtxt) from mashDistResults
+
+    output:
+    file "${fasta}_mashdist.json" into mashDistOutput
 
     script:
     template "mashdist2json.py"
@@ -215,6 +221,44 @@ process jsonDumpingMapping {
     set sample, file(depthFile) from samtoolsResults
     val lengthJson from lengthJsonChannel
 
+    output:
+    file "samtoolsDepthOutput_${sample}.txt.json" into mappingOutput
+
     script:
     template "mapping2json.py"
+}
+
+
+/**
+* After generating all output jsons check again the params specified.
+* If mapping and mash_screen are executed the consensus process will generate
+* a consensus from these two json outputs. If assembly is also provided, the
+* consensus will have the consensus between the three approaches. Otherwise,
+* no consensus will be generated.
+*/
+if (params.mapping && params.mash_screen) {
+    if (params.assembly) {
+        test = mappingOutput.merge(mashDistOutput, mashScreenOutput)
+    }
+    else {
+        test = mappingOutput.merge(mashScreenOutput)
+    }
+}
+else {
+    test = Channel.empty()
+}
+
+/**
+* A process that creates a consensus from all the outputted json files
+*/
+process fullConsensus {
+
+    tag { "Creating consensus json file" }
+
+    input:
+    file(list_of_files) from test
+
+    script:
+    template "pATLAS_consensus_json.py"
+
 }
