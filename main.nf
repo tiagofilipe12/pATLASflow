@@ -38,7 +38,7 @@ if (params.mash_screen || params.mapping) {
 if (params.mash_screen || params.assembly) {
     // creates two channels for each approach
     Channel
-        .value("/home/data/patlas.msh")
+        .value("/ngstools/data/patlas.msh")
         .into { refSketchChannel; refSketchChannel2 }
 }
 else {
@@ -63,15 +63,15 @@ if (params.assembly) {
 if (params.mapping) {
 
     //fetch indexes for mapping approach, available in Docker
-//    bowtie2Index = "/home/data/indexes/bowtie2idx/bowtie2.idx"  // idx_file
-//    samtoolsIndex = "/home/data/indexes/fasta/samtools.fasta.fai"   // maindb_path
-//    lengthJson = "/home/data/reads_sample_result_length.json"
+//    bowtie2Index = "/ngstools/data/indexes/bowtie2idx/bowtie2.idx"  // idx_file
+//    samtoolsIndex = "/ngstools/data/indexes/fasta/samtools.fasta.fai"   // maindb_path
+//    lengthJson = "/ngstools/data/reads_sample_result_length.json"
     bowtieStuffChannel = Channel
-        .value("/home/data/indexes/bowtie2idx/bowtie2.idx")
+        .value("/ngstools/data/indexes/bowtie2idx/bowtie2.idx")
     samtoolsStuffChannel = Channel
-        .value("/home/data/indexes/fasta/samtools.fasta.fai")
+        .value("/ngstools/data/indexes/fasta/samtools.fasta.fai")
     lengthJsonChannel = Channel
-        .value("/home/data/reads_sample_result_length.json")
+        .value("/ngstools/data/reads_sample_result_length.json")
 }
 else {
     bowtieStuffChannel = Channel.empty()
