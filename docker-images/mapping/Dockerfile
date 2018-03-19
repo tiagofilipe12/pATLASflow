@@ -14,7 +14,7 @@ RUN apt-get update && apt-get -y install \
     libbz2-dev \
     liblzma-dev
 
-WORKDIR /home/bin/
+WORKDIR /ngstools/bin/
 
 # Download and install bowtie2
 
@@ -22,7 +22,7 @@ RUN wget https://downloads.sourceforge.net/project/bowtie-bio/bowtie2/2.3.4/bowt
 
 RUN unzip bowtie2-2.3.4-linux-x86_64.zip
 
-ENV PATH="/home/bin/bowtie2-2.3.4-linux-x86_64:$PATH"
+ENV PATH="/ngstools/bin/bowtie2-2.3.4-linux-x86_64:$PATH"
 
 # Download and install samtools
 
@@ -30,15 +30,15 @@ RUN wget https://sourceforge.net/projects/samtools/files/samtools/1.7/samtools-1
 
 RUN tar jxf samtools-1.7.tar.bz2
 
-WORKDIR /home/bin/samtools-1.7/
+WORKDIR /ngstools/bin/samtools-1.7/
 
 RUN ./configure --without-curses && make
 
-ENV PATH="/home/bin/samtools-1.7:$PATH"
+ENV PATH="/ngstools/bin/samtools-1.7:$PATH"
 
 # Download databases from PlasmidCoverage
 
-WORKDIR /home/data/
+WORKDIR /ngstools/data/
 
 RUN wget https://github.com/tiagofilipe12/PlasmidCoverage/releases/download/1.0.4/indexes.tar.gz
 
