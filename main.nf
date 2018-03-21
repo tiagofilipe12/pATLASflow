@@ -135,7 +135,7 @@ process runMashDist {
     set fasta, file("${fasta}_mashdist.txt") into mashDistResults
 
     """
-    mash dist -p ${params.threads} -v ${params.pValue} \
+    mash dist -i -p ${params.threads} -v ${params.pValue} \
     -d ${params.mash_distance} ${refSketch} ${fasta} > ${fasta}_mashdist.txt
     """
 }
@@ -148,8 +148,8 @@ process mashDistOutputJson {
     input:
     set fasta, file(mashtxt) from mashDistResults
 
-    output:
-    file "${fasta}_mashdist.json" into mashDistOutput
+//    output:
+//    file "${fasta}_mashdist.json" into mashDistOutput
 
     script:
     template "mashdist2json.py"
@@ -237,15 +237,15 @@ process jsonDumpingMapping {
 * no consensus will be generated.
 */
 if (params.mapping && params.mash_screen) {
-    if (params.assembly) {
-        test = mappingOutput.merge(mashDistOutput, mashScreenOutput)
-    }
-    else {
-        test = mappingOutput.merge(mashScreenOutput)
-    }
+//    if (params.assembly) {
+//        test = mappingOutput.merge(mashDistOutput, mashScreenOutput)
+//    }
+//    else {
+    consensusChannel = mappingOutput.merge(mashScreenOutput)
+//    }
 }
 else {
-    test = Channel.empty()
+    consensusChannel = Channel.empty()
 }
 
 /**
@@ -256,7 +256,7 @@ process fullConsensus {
     tag { "Creating consensus json file" }
 
     input:
-    file(list_of_files) from test
+    file(list_of_files) from consensusChannel
 
     script:
     template "pATLAS_consensus_json.py"
