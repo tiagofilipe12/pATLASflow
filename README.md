@@ -47,6 +47,9 @@ It will output a `JSON` file that can be imported into [pATLAS](http://www.patla
 
 If you prefer you can use this conda recipe for nextflow: [![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat-square)](http://bioconda.github.io/recipes/nextflow/README.html)
 
+```
+conda install nextflow
+```
 
 ## Usage
 
