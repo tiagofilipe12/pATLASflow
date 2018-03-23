@@ -3,7 +3,7 @@
 [![](https://img.shields.io/badge/nextflow->=0.27.3-blue.svg)](#)
 [![](https://img.shields.io/badge/docker_mash-ready-green.svg)](https://hub.docker.com/r/tiagofilipe12/patlasflow_mash_screen/)
 [![](https://img.shields.io/badge/docker_mapping-ready-green.svg)](https://hub.docker.com/r/tiagofilipe12/patlasflow_mapping/)
-[![](https://img.shields.io/badge/pATLAS-1.x.x-lightgrey.svg)](https://github.com/tiagofilipe12/pATLAS)
+[![](https://img.shields.io/badge/pATLAS-1.1.x-lightgrey.svg)](https://github.com/tiagofilipe12/pATLAS)
 
 A pipeline to run mapping, mash screen and assembly methods for pATLAS.
 
