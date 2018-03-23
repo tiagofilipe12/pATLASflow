@@ -39,6 +39,11 @@ It will output a `JSON` file that can be imported into [pATLAS](http://www.patla
 
 ## Requirements
 
+First of all, pATLASflow is a Nextflow pipeline and thus does not
+require the installation of third party programs since they are provided
+through docker container that can be used both with singularity and
+docker.
+
 * [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) or higher.
 * [Docker](https://docs.docker.com/install/) or [Singularity](http://singularity.lbl.gov/install-linux).
 * [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html#installation) - follow the two installation steps (there is no need to read anything else).
@@ -46,6 +51,7 @@ It will output a `JSON` file that can be imported into [pATLAS](http://www.patla
 ### Conda recipe for nextflow
 
 If you prefer you can use this conda recipe for nextflow: [![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat-square)](http://bioconda.github.io/recipes/nextflow/README.html)
+
 
 ```
 conda install nextflow
@@ -57,7 +63,7 @@ conda install nextflow
 Usage: nextflow run tiagofilipe12/pATLASflow [options] or nextflow run main.nf [options] or ./main.nf [options]
 
   Nextflow magic options:
-       -profile    Forces nextflow to run with docker or singularity.   Default: docker     Choices: standard, singularity
+       -profile    Forces nextflow to run with docker or singularity.   Default: standard     Choices: standard, singularity, slurm
    Main options:
        --help  Opens this help. It will open only when --help is provided. So, yes, this line is pretty useless since you already know that if you reached here.
        --version   Prints the version of the pipeline script.
@@ -90,3 +96,12 @@ Usage: nextflow run tiagofilipe12/pATLASflow [options] or nextflow run main.nf [
 
 `nextflow run tiagofilipe12/pATLASflow --assembly`
 
+## Slurm profile
+
+One can run this pipeline using the `slurm` profile, which enalbes to
+use it with `shifter` and slurm.
+
+### IMM-lobo users
+
+In order to avoid the usage of `compute-1` you need to uncomment line
+[62 in nextflow.config](https://github.com/tiagofilipe12/pATLASflow/blob/master/nextflow.config#L62) file.

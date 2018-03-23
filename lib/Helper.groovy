@@ -10,7 +10,8 @@ class Help{
         println("   nextflow run tiagofilipe12/pATLAS_mash_screen.nf\n")
         println("   Nextflow magic options:")
         println("       -profile    Forces nextflow to run with docker or " +
-            "singularity.   Default: docker     Choices: standard, singularity")
+            "singularity.   Default: standard     Choices: standard, singularity," +
+            "slurm")
         println("   Main options:")
         println("       --help  Opens this help. It will open only when --help is " +
             "provided. So, yes, this line is pretty useless since you already " +
