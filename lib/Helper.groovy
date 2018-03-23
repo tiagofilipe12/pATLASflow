@@ -6,6 +6,7 @@ class Help{
         println("\n===========================================================")
         println("                   p A T L A S f l o w")
         println("===========================================================\n")
+        println("Version: 1.1.0\n")
         println("Usage:")
         println("   nextflow run tiagofilipe12/pATLAS_mash_screen.nf\n")
         println("   Nextflow magic options:")
