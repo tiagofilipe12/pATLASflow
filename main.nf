@@ -98,7 +98,7 @@ process mashScreen {
 
     """
     mash screen -i ${params.identity} -v ${params.pValue} -p \
-    ${params.threads} ${winnerVar} ${refSketch} ${reads} > mashScreenResults_${sample}.txt
+    ${task.cpus} ${winnerVar} ${refSketch} ${reads} > mashScreenResults_${sample}.txt
     sort -gr mashScreenResults_${sample}.txt > sortedMashScreenResults_${sample}.txt
     """
 }
@@ -135,7 +135,7 @@ process runMashDist {
     set fasta, file("${fasta}_mashdist.txt") into mashDistResults
 
     """
-    mash dist -i -p ${params.threads} -v ${params.pValue} \
+    mash dist -i -p ${task.cpus} -v ${params.pValue} \
     -d ${params.mash_distance} ${refSketch} ${fasta} > ${fasta}_mashdist.txt
     """
 }
@@ -181,7 +181,7 @@ process mappingBowtie {
     }
 
     """
-    bowtie2 -x ${bowtie2Index} ${readsString} -p ${params.threads} -k \
+    bowtie2 -x ${bowtie2Index} ${readsString} -p ${task.cpus} -k \
     ${params.max_k} -5 ${params.trim5} -S mappingBowtie_${sample}.sam
     """
 }
@@ -202,8 +202,8 @@ process samtoolsView {
     set sample, file("samtoolsDepthOutput_${sample}.txt") into samtoolsResults
 
     """
-    samtools view -b -t ${samtoolsIdx} -@ ${params.threads} ${samtoolsFile} | \
-    samtools sort -@ ${params.threads} -o samtoolsSorted_${sample}.bam
+    samtools view -b -t ${samtoolsIdx} -@ ${task.cpus} ${samtoolsFile} | \
+    samtools sort -@ ${task.cpus} -o samtoolsSorted_${sample}.bam
     samtools index samtoolsSorted_${sample}.bam
     samtools depth samtoolsSorted_${sample}.bam > samtoolsDepthOutput_${sample}.txt
     """
