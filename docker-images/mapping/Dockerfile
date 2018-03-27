@@ -22,7 +22,7 @@ RUN wget https://downloads.sourceforge.net/project/bowtie-bio/bowtie2/2.2.9/bowt
 
 RUN unzip bowtie2-2.2.9-linux-x86_64.zip
 
-ENV PATH="/ngstools/bin/bowtie2-2.2.9-linux-x86_64:$PATH"
+ENV PATH="/ngstools/bin/bowtie2-2.2.9:$PATH"
 
 # Download and install samtools
 
