@@ -222,7 +222,7 @@ process jsonDumpingMapping {
     val lengthJson from lengthJsonChannel
 
     output:
-    file "samtoolsDepthOutput_${sample}.txt.json" into mappingOutput
+    file "samtoolsDepthOutput_${sample}.txt_mapping.json" into mappingOutput
 
     script:
     template "mapping2json.py"
