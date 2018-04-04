@@ -36,7 +36,7 @@ class Help{
         println("       --mash_distance     Provide the maximum distance between " +
             "two plasmids to be reported.   Default: 0.1")
         println("       --shared_hashes     Provide a percentage for the hashes" +
-            "shared between the reference and the query sequence(s).   Default: 0.1")
+            "shared between the reference and the query sequence(s).   Default: 0.8")
         println("   Reads options:")
         println("       --reads The path to the read files. Here users may provide " +
             "many samples in the same directory. However be assured that glob " +

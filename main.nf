@@ -112,7 +112,7 @@ process mashOutputJson {
     set sample, file(mashtxt) from mashScreenResults
 
     output:
-    file "sortedMashScreenResults_${sample}.json" into mashScreenOutput
+    set sample, file("sortedMashScreenResults_${sample}.json") into mashScreenOutput
 
     script:
     template "mashscreen2json.py"
@@ -222,7 +222,7 @@ process jsonDumpingMapping {
     val lengthJson from lengthJsonChannel
 
     output:
-    file "samtoolsDepthOutput_${sample}.txt_mapping.json" into mappingOutput
+    set sample, file("samtoolsDepthOutput_${sample}.txt_mapping.json") into mappingOutput
 
     script:
     template "mapping2json.py"
@@ -241,7 +241,7 @@ if (params.mapping && params.mash_screen) {
 //        test = mappingOutput.merge(mashDistOutput, mashScreenOutput)
 //    }
 //    else {
-    consensusChannel = mappingOutput.merge(mashScreenOutput)
+    consensusChannel = mappingOutput.join(mashScreenOutput)
 //    }
 }
 else {
@@ -253,10 +253,10 @@ else {
 */
 process fullConsensus {
 
-    tag { "Creating consensus json file" }
+    tag { "Creating consensus json file for: " + sample}
 
     input:
-    file(list_of_files) from consensusChannel
+    set sample, file(infile1), file(infile2) from consensusChannel
 
     script:
     template "pATLAS_consensus_json.py"
