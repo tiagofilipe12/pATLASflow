@@ -108,6 +108,8 @@ process mashOutputJson {
 
     tag { "dumping json file from: " + mashtxt }
 
+    publishDir 'results/mashscreen/'
+
     input:
     set sample, file(mashtxt) from mashScreenResults
 
@@ -145,11 +147,13 @@ process mashDistOutputJson {
 
     tag { "dumping json file from: " + mashtxt }
 
+    publishDir 'results/mashdist/'
+
     input:
     set fasta, file(mashtxt) from mashDistResults
 
-//    output:
-//    file "${fasta}_mashdist.json" into mashDistOutput
+    output:
+    file "*.json" into mashDistOutput
 
     script:
     template "mashdist2json.py"
@@ -217,6 +221,8 @@ process jsonDumpingMapping {
 
     tag { "Dumping json: " +  sample }
 
+    publishDir 'results/mapping/'
+
     input:
     set sample, file(depthFile) from samtoolsResults
     val lengthJson from lengthJsonChannel
@@ -255,8 +261,13 @@ process fullConsensus {
 
     tag { "Creating consensus json file for: " + sample}
 
+    publishDir 'results/consensus/'
+
     input:
     set sample, file(infile1), file(infile2) from consensusChannel
+
+    output:
+    file "consensus_${sample}.json"
 
     script:
     template "pATLAS_consensus_json.py"
