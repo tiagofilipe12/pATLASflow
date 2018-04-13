@@ -264,7 +264,7 @@ process fullConsensus {
     publishDir 'results/consensus/'
 
     input:
-    set sample, file(infile1), file(infile2) from consensusChannel
+    set sample, file(infile_list) from consensusChannel.map{ ot -> [ ot[0], ot[1..-1] ] }
 
     output:
     file "consensus_${sample}.json"
