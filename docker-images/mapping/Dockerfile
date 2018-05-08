@@ -40,7 +40,7 @@ ENV PATH="/ngstools/bin/samtools-1.7:$PATH"
 
 WORKDIR /ngstools/data/
 
-RUN wget https://github.com/tiagofilipe12/PlasmidCoverage/releases/download/1.0.4/indexes.tar.gz
+RUN wget https://github.com/tiagofilipe12/PlasmidCoverage/releases/download/1.1.0/indexes.tar.gz
 
 RUN tar xvzf indexes.tar.gz
 
