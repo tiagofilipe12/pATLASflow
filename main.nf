@@ -67,7 +67,7 @@ if (params.mapping) {
 //    samtoolsIndex = "/ngstools/data/indexes/fasta/samtools.fasta.fai"   // maindb_path
 //    lengthJson = "/ngstools/data/reads_sample_result_length.json"
     bowtieStuffChannel = Channel
-        .value("/ngstools/data/indexes/bowtie2idx/bowtie2.idx")
+        .value("/ngstools/data/indexes/bowtie2idx/bowtie2")
     samtoolsStuffChannel = Channel
         .value("/ngstools/data/indexes/fasta/samtools.fasta.fai")
     lengthJsonChannel = Channel
