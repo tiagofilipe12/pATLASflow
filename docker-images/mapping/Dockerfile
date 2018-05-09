@@ -40,10 +40,10 @@ ENV PATH="/ngstools/bin/samtools-1.7:$PATH"
 
 WORKDIR /ngstools/data/
 
-RUN wget https://github.com/tiagofilipe12/PlasmidCoverage/releases/download/1.1.0/indexes.tar.gz
+RUN wget https://github.com/tiagofilipe12/PlasmidCoverage/releases/download/1.1.1/indexes.tar.gz
 
 RUN tar xvzf indexes.tar.gz
 
 # Fetches json with lenghts used to generate -k parameter for bowtie as well as
 # plasmid lenghts
-RUN wget https://raw.githubusercontent.com/tiagofilipe12/PlasmidCoverage/master/plasmiduncover/json/reads_sample_result_length.json
+RUN wget https://github.com/tiagofilipe12/PlasmidCoverage/releases/download/1.1.1/reads_sample_result_length.json
