@@ -38,7 +38,7 @@ if (params.mash_screen || params.mapping) {
 if (params.mash_screen || params.assembly) {
     // creates two channels for each approach
     Channel
-        .value("/ngstools/data/patlas.msh")
+        .value("/ngstools/data/patlas_mash_sketch.msh")
         .into { refSketchChannel; refSketchChannel2 }
 }
 else {
@@ -67,9 +67,9 @@ if (params.mapping) {
 //    samtoolsIndex = "/ngstools/data/indexes/fasta/samtools.fasta.fai"   // maindb_path
 //    lengthJson = "/ngstools/data/reads_sample_result_length.json"
     bowtieStuffChannel = Channel
-        .value("/ngstools/data/indexes/bowtie2idx/bowtie2")
+        .value("/ngstools/data/indexes/patlas_bowtie_index")
     samtoolsStuffChannel = Channel
-        .value("/ngstools/data/indexes/fasta/samtools.fasta.fai")
+        .value("/ngstools/data/indexes/master_fasta_patlas_version_18042018.fas.fai")
     lengthJsonChannel = Channel
         .value("/ngstools/data/reads_sample_result_length.json")
 }
