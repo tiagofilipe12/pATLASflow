@@ -18,8 +18,6 @@ class Help{
             "provided. So, yes, this line is pretty useless since you already " +
             "know that if you reached here.")
         println("       --version   Prints the version of the pipeline script.")
-        println("       --threads   Number of threads that the pipeline will have to" +
-            " run.    Default: 1")
         println("       --mash_screen   Enables mash screen run.")
         println("       --assembly  Enables mash dist run to use fasta file against " +
             "plasmid db")

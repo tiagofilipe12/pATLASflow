@@ -67,7 +67,6 @@ Usage: nextflow run tiagofilipe12/pATLASflow [options] or nextflow run main.nf [
    Main options:
        --help  Opens this help. It will open only when --help is provided. So, yes, this line is pretty useless since you already know that if you reached here.
        --version   Prints the version of the pipeline script.
-       --threads   Number of threads that the pipeline will have to run.    Default: 1
        --mash_screen   Enables mash screen run.
        --assembly  Enables mash dist run to use fasta file against plasmid db
        --mapping   Enables mapping pipeline.
