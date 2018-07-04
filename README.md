@@ -84,7 +84,6 @@ Usage: nextflow run tiagofilipe12/pATLASflow [options] or nextflow run main.nf [
    Fasta options:
        --fasta     Provide fasta file pattern to be searched by nextflow.  Default: 'fasta/*.fas'
    Bowtie2 options:
-       --max_k     Provide the maximum number of alignments allowed per read.  Default: 10949 (the number of plasmids present in pATLAS)
        --trim5     Provide parameter -5 to bowtie2 allowing to trim 5' end.    Default: 0
        --cov_cutoff    Provide a cutoff value to filter results for coverage results.  Default: 0.60
 

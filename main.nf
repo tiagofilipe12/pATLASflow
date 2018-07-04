@@ -185,8 +185,8 @@ process mappingBowtie {
     }
 
     """
-    bowtie2 -x ${bowtie2Index} ${readsString} -p ${task.cpus} -k \
-    ${params.max_k} -5 ${params.trim5} -S mappingBowtie_${sample}.sam
+    bowtie2 -x ${bowtie2Index} ${readsString} -p ${task.cpus} -a \
+    -5 ${params.trim5} -S mappingBowtie_${sample}.sam
     """
 }
 

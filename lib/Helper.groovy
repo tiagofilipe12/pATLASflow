@@ -46,8 +46,6 @@ class Help{
         println("       --fasta     Provide fasta file pattern to be searched by " +
             "nextflow.  Default: 'fasta/*.fas'")
         println("   Bowtie2 options:")
-        println("       --max_k     Provide the maximum number of alignments allowed " +
-            "per read.  Default: 10949 (the number of plasmids present in pATLAS)")
         println("       --trim5     Provide parameter -5 to bowtie2 allowing to trim " +
             "5' end.    Default: 0")
         println("       --cov_cutoff    Provide a cutoff value to filter results for " +
