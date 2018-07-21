@@ -103,3 +103,8 @@ use it with `shifter` and slurm.
 
 In order to avoid the usage of `compute-1` you need to uncomment line
 [62 in nextflow.config](https://github.com/tiagofilipe12/pATLASflow/blob/master/nextflow.config#L62) file.
+
+## Results
+
+Results will be placed in a folder named `results` within the current working
+directory.
