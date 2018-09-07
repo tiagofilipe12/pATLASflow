@@ -114,7 +114,7 @@ process mashOutputJson {
     set sample, file(mashtxt) from mashScreenResults
 
     output:
-    set sample, file("sortedMashScreenResults_${sample}.json") into mashScreenOutput
+    set sample, file("sortedMashScreenResults_${sample}.json") optional true into mashScreenOutput
 
     script:
     template "mashscreen2json.py"
@@ -153,7 +153,7 @@ process mashDistOutputJson {
     set fasta, file(mashtxt) from mashDistResults
 
     output:
-    file "*.json" into mashDistOutput
+    file "*.json" optional true into mashDistOutput
 
     script:
     template "mashdist2json.py"
@@ -228,7 +228,7 @@ process jsonDumpingMapping {
     val lengthJson from lengthJsonChannel
 
     output:
-    set sample, file("samtoolsDepthOutput_${sample}.txt_mapping.json") into mappingOutput
+    set sample, file("samtoolsDepthOutput_${sample}.txt_mapping.json") optional true into mappingOutput
 
     script:
     template "mapping2json.py"
