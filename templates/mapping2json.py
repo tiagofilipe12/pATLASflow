@@ -36,7 +36,7 @@ __template__ = "mapping2json-nf"
 import os
 import json
 
-from templates.assemblerflow_utils import get_logger, MainWrapper
+from assemblerflow_utils.assemblerflow_base import get_logger, MainWrapper
 
 logger = get_logger(__file__)
 
@@ -66,7 +66,8 @@ def depthfilereader(depth_file, plasmid_length, cutoff):
     cutoff: str
         the cutoff used to trim the unwanted matches for the minimum coverage
         results from mapping. This is then converted into a float within this
-        function in order to compare with the value returned from the perc_value_per_ref.
+        function in order to compare with the value returned from the
+        perc_value_per_ref.
 
     Returns
     -------
