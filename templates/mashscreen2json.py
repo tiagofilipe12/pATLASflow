@@ -90,7 +90,7 @@ def main(mash_output):
             # estimated copy number
             copy_number = int(float(v[1]) / median_cutoff)
             # assure that plasmid as at least twice the median coverage depth
-            if float(v[1]) > median_cutoff:
+            if float(v[1]) >= median_cutoff:
                 filtered_dic["_".join(k.split("_")[0:3])] = [v[0],
                                                              str(copy_number)]
         logger.info(
