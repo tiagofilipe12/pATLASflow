@@ -134,7 +134,7 @@ process runMashDist {
     val refSketch from refSketchChannel2
 
     output:
-    set fasta, file("${fasta}_mashdist.txt") into mashDistResults
+    set file(fasta), file("${fasta}_mashdist.txt") into mashDistResults
 
     """
     mash dist -i -p ${task.cpus} -v ${params.pValue} \
